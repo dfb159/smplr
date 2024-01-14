@@ -7,8 +7,7 @@ from uncertainties.unumpy import nominal_values as unv
 from uncertainties.unumpy import std_devs as usd
 from uncertainties import unumpy as unp
 
-from smplr.util import unv_lambda
-from smplr.util import usd_lambda
+from smplr.util import uncertain, unv_lambda, usd_lambda
 
 _functions = [lambda x: np.zeros_like(x), lambda x: x, lambda x: x + 1, lambda x: x**2]
 _arrays = [np.zeros(0), np.array(1), np.array([]), np.array([1, 2, 3, 4]), np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])]
@@ -78,3 +77,22 @@ def test_usd_lambda_mixed_uncertainties(fn, values):
     expected = usd(fn(values))
     actual = usd_lambda(fn)(values)
     assert np.allclose(actual, expected)
+
+
+@pytest.mark.parametrize(
+    "data, mode, expected",
+    [
+        (np.array([1, 2, 3]), 'all', False),
+        (np.array([1, 2, 3]), 'any', False),
+        (unp.uarray([1, 2, 3], 0), 'all', False),
+        (unp.uarray([1, 2, 3], 0), 'any', False),
+        (unp.uarray([1, 2, 3], [0.1, 0, 0.3]), 'all', False),
+        (unp.uarray([1, 2, 3], [0.1, 0, 0.3]), 'any', True),
+        (unp.uarray([1, 2, 3], [0.1, 0.2, 0.3]), 'all', True),
+        (unp.uarray([1, 2, 3], [0.1, 0.2, 0.3]), 'any', True),
+    ],
+)
+def test_uncertain(data, mode, expected):
+    """Test if ALL or ANY datapoints have uncertainties."""
+    actual = uncertain(data, mode)
+    assert actual == expected
