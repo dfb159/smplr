@@ -35,9 +35,7 @@ jobs:
         pip install poetry
 
     - name: Install dependencies
-      run: |
-        poetry env use
-        poetry install
+      run: poetry install
 
     - name: Lint with flake8
       run: |
