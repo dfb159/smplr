@@ -46,6 +46,11 @@ maybe/future:
 
 
 
+
+
+
+
+
 from elsewhere to documentation:
 maybe thin wrapper for convenience?
 
@@ -76,13 +81,6 @@ maybe thin wrapper for convenience?
 #     array = np.asarray(array)
 #     idx = (np.abs(array - value)).argmin()
 #     return idx, array(idx)
-#
-#
-# def uncertain(array, mode='all'):
-#     """True, if ALL pr ANY datapoints have uncertainties."""
-#     if mode == 'all':
-#         return not any(usd(array) == 0)
-#     return not all(usd(array) == 0)
 #
 #
 # def reduce_function(f, **kwargs):
