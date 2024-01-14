@@ -1,0 +1,122 @@
+=====
+SMPLR
+=====
+
+- data import/export (+latex)
+- uncertainties
+  - first order uncertainties package
+  - higher orders of momenta
+  - statistical set of points mapping (expensive)
+- fitting
+- interpolation in n dimension
+- simulation
+  - state based
+  - forward, backward
+  - continuous result (interpolation of order n)
+  - usage of previous data (warning, if step size is [significantly] lower than expected by RK)
+  - for fields
+  - maybe fast implementation in other language backend
+  - edge case solver (gradient descend of input variables, fitting)
+  - multidimensional? (might be connected to solver)
+- plotting
+- animation in 2D and 3D for the most common use cases
+- probability
+  - discrete propagation for mathematical operators
+  - functional propagation of distributions
+  - MC propagation for complex cases (+ uncertainty)
+- units
+  - mathematical operators and functions allowed
+  - in base units with arbitrary powers
+  - what about mixed units (2m + 1.2 m² ?), maybe extra class, not on first principle
+- utils
+  - get nearest (multidimensional)
+- noise generation in n dimensions
+
+maybe/future:
+- documentation tools
+- wrapping tools
+- parallel
+- gemoetric algebra?
+- sympy integration
+
+
+
+
+
+
+
+
+from elsewhere to documentation:
+maybe thin wrapper for convenience?
+
+
+# def table_str(table, start=True, end=True, indent='    '):
+#     """
+#     Return a string representation of this table-like structure.
+#
+#     Use from tabulate import tabulate:
+#     table = [['col 1', 'col 2', 'col 3', 'col 4'], [1, 2222, 30, 500], [4, 55, 6777, 1]]
+#     print(tabulate(table, headers='firstrow', tablefmt='fancy_grid'))
+#
+#     Or from prettytable import PrettyTable:
+#     table = [['col 1', 'col 2', 'col 3', 'col 4'], [1, 2222, 30, 500], [4, 55, 6777, 1]]
+#     tab = PrettyTable(table[0])
+#     tab.add_rows(table[1:])
+#     print(tab)
+#     """
+#     raise NotImplementedError()
+#
+#
+# def find_nearest(array, value):
+#     """
+#     Return the index and value of the item in ``array`` closest to ``value``.
+#
+#     TODO: Move to algorithm package
+#     """
+#     array = np.asarray(array)
+#     idx = (np.abs(array - value)).argmin()
+#     return idx, array(idx)
+#
+#
+# def uncertain(array, mode='all'):
+#     """True, if ALL pr ANY datapoints have uncertainties."""
+#     if mode == 'all':
+#         return not any(usd(array) == 0)
+#     return not all(usd(array) == 0)
+#
+#
+# def reduce_function(f, **kwargs):
+#     """
+#     Use from functools import partial.
+#
+#     # A normal function
+#     def f(a, b, c, x):
+#         return 1000*a + 100*b + 10*c + x
+#
+#     # A partial function that calls f with
+#     # a as 3, b as 1 and c as 4.
+#     g = partial(f, 3, 1, 4)
+#
+#     # Calling g()
+#     print(g(5))
+#     """
+#     raise NotImplementedError()
+
+
+# def get_func_description(function, pfit=None, units=None):
+#    """
+#    Returns a LaTeX string of the function and its parameters/units if provided.
+#    """
+#    name = function.__name__
+#    if name == "<lambda>":
+#        name = "\\lambda"
+#    equation = function.__doc__.split('\n')[0]
+#    pnames = function.__code__.co_varnames[1:]
+#    eq = "$%s(%s) = %s$" % (name, ','.join(pnames), equation.replace('$', ''))
+#    if pfit is None:
+#        return eq
+#    if units == None:
+#        units = [''] * len(pfit)
+#    assert len(pnames) == len(pfit) == len(units)
+#    var = ["$%s = %s %s$" % (n, latexify(v), u) for n, v, u in zip(pnames, pfit, units)]
+#    return eq + '\n' + '\n'.join(var)
