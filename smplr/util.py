@@ -4,7 +4,6 @@ from uncertainties.unumpy import nominal_values as unv
 from uncertainties.unumpy import std_devs as usd
 
 
-
 def unv_lambda(fn):
     """Return only the nominal values of ``fn``."""
 
