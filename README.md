@@ -2,6 +2,8 @@
 This is a library for all your analysis needs.
 Made simple and accessible for everyday use.
 
+[![Python application](https://github.com/dfb159/smplr/actions/workflows/python-test.yml/badge.svg?event=status)](https://github.com/dfb159/smplr/actions/workflows/python-test.yml)
+
 ## Feature overview
 - automatic handling of uncertainties in every module
 - importing from csv into numpy and pandas
